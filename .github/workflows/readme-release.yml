@@ -184,8 +184,6 @@ jobs:
         name: Set up docker buildx
         if: env.VERSIONTAG_THIS != ''
         uses: docker/setup-buildx-action@v4
-        with:
-          install: true
       -
         name: Define versions
         if: env.VERSIONTAG_THIS != ''
