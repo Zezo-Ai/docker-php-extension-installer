@@ -336,7 +336,7 @@ install-php-extensions @fix_letsencrypt
 | pdo_snowflake[*](#special-requirements-for-pdo_snowflake) |  | &check; | &check; | &check; | &check; |  |  |  |  |  |  |  |  |
 | pdo_sqlsrv | &check; | &check; | &check; | &check; | &check; | &check; | &check; | &check; | &check; | &check; | &check; |  |  |
 | pgsql | &check; | &check; | &check; | &check; | &check; | &check; | &check; | &check; | &check; | &check; | &check; | &check; | &check; |
-| phalcon |  | &check; | &check; | &check; | &check; | &check; | &check; | &check; | &check; |  |  |  |  |
+| phalcon | &check; | &check; | &check; | &check; | &check; | &check; | &check; | &check; | &check; |  |  |  |  |
 | php_trie |  | &check; | &check; | &check; | &check; | &check; | &check; | &check; |  |  |  |  |  |
 | phpy[*](#special-requirements-for-phpy) | &check; | &check; | &check; | &check; | &check; |  |  |  |  |  |  |  |  |
 | pkcs11 | &check; | &check; | &check; | &check; | &check; | &check; | &check; |  |  |  |  |  |  |
