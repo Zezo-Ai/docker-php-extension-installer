@@ -4282,11 +4282,9 @@ installRemoteModule() {
 					fi
 					;;
 				debian)
-					case "$(dpkg -l 'libssl*' | grep -E '^ii ' | cut -d' ' -f3)" in
-						libssl3*)
-							installRemoteModule_flags=+libssl3
-							;;
-					esac
+					if dpkg -l 'libssl*' | grep -E '^ii ' | cut -d' ' -f3 | grep -q '^libssl3'; then
+						installRemoteModule_flags=+libssl3
+					fi
 					;;
 			esac
 			# See https://relay.so/builds
@@ -4294,7 +4292,11 @@ installRemoteModule() {
 			printf 'Downloading relay v%s (%s) from %s... ' "$installRemoteModule_version" "$installRemoteModule_hardware" "$installRemoteModule_url"
 			installRemoteModule_src="$(getPackageSource $installRemoteModule_url)"
 			echo 'done.'
-			cp -- "$installRemoteModule_src/relay-pkg.so" "$PHP_EXTDIR/relay.so"
+			if test $PHP_THREADSAFE -eq 1; then
+				cp -- "$installRemoteModule_src/relay-zts.so" "$PHP_EXTDIR/relay.so"
+			else
+				cp -- "$installRemoteModule_src/relay-pkg.so" "$PHP_EXTDIR/relay.so"
+			fi
 			sed -i "s/00000000-0000-0000-0000-000000000000/$(cat /proc/sys/kernel/random/uuid)/" "$PHP_EXTDIR/relay.so"
 			installRemoteModule_ini_extra="$(grep -vE '^[ \t]*extension[ \t]*=' $installRemoteModule_src/relay.ini)"
 			installRemoteModule_manuallyInstalled=1
